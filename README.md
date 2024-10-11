@@ -1,24 +1,44 @@
-EventScheduler-GApps
+# Google Sheets to Calendar and Email Automation Script
 
-EventScheduler-GApps is a comprehensive Google Apps Script solution designed to automate the process of scheduling events in Google Calendar based on the information stored in a Google Spreadsheet. This script not only simplifies the event creation process but also sends personalized email reminders for upcoming events or checks, making it an ideal tool for managing appointments, reminders, and follow-ups for a variety of purposes including medical appointments, educational course reminders, and personal events.
+This script automates the process of creating calendar events from form submissions stored in Google Sheets and sending email reminders based on specific time intervals. It is designed to work with Google Sheets, Google Calendar, and Gmail.
 
-Features
+![Screenshot](ss.png)
 
-Automated Event Creation: Automatically creates Google Calendar events using the details provided in a Google Spreadsheet. Ideal for scheduling appointments, meetings, or reminders without manual input.
-Personalized Email Reminders: Sends out email reminders at predetermined intervals before an event, ensuring participants are well-informed and prepared.
-Customizable Reminder Schedule: Offers flexibility to define custom reminder schedules based on specific needs, such as weekly, monthly, or yearly reminders.
-Easy to Use and Customize: Designed with simplicity in mind, allowing users to easily customize the script to fit their specific scheduling and reminder needs.
+## Features
 
-How to Use
+- **Event Creation**: Automatically creates Google Calendar events from data stored in a Google Sheet.
+- **Email Notifications**: Sends an instant email notification when a calendar event is created and additional reminder emails based on set time intervals.
+- **Customizable Reminders**: You can set email reminders for different intervals, such as 7 days, 14 days, 30 days, and more, and tailor the message accordingly.
+- **Flexible Usage**: Suitable for use with any form submissions saved to Google Sheets (e.g., from a website form) or manually entered data.
 
-Setup Spreadsheet: Create a Google Spreadsheet with event details such as title, description, date, and participant information.
-Configure Script: Copy the EventScheduler-GApps script into the script editor of your Google Spreadsheet and set the CALENDARID to your Google Calendar's ID.
-Run and Schedule: Execute the script to create events and configure triggers for daily checks to send out reminders automatically.
+## How It Works
 
-Installation
+1. The script reads the data from a Google Sheet (`Sayfa1`).
+2. For each new entry in the sheet, a calendar event is created using the specified date.
+3. Email notifications are sent upon event creation, and periodic reminders are scheduled based on the event date.
+4. The script also checks daily for events that require a reminder and sends reminder emails accordingly.
 
-Detailed instructions on how to set up and deploy EventScheduler-GApps within your Google Workspace environment, including how to configure calendar IDs, customize email messages, and schedule the script to run automatically.
+## Installation
 
-Contributing
+1. **Set Up Google Sheets and Calendar**: Create a Google Sheet with the necessary columns: `Event Title`, `Phone`, `Email`, `Country`, and `Event Date`.
+2. **Google Apps Script**: Open the script editor in Google Sheets by navigating to `Extensions > Apps Script`.
+3. **Copy the Script**: Copy and paste the provided script into the Google Apps Script editor.
+4. **Calendar ID**: Replace `'CALENDARID'` in the script with your Google Calendar ID.
 
-We welcome contributions to EventScheduler-GApps! If you have suggestions for improvements or encounter any issues, please feel free to submit an issue or pull request.
+## Example Data Structure in Google Sheets
+
+| Event Title | Phone    | E-mail           | Country | Date        | Event Added | Email Sent | First Week | Second Week | First Month | ... |
+|-------------|----------|------------------|---------|-------------|-------------|------------|------------|--------------|------------ |-----|
+| Event Name  | 123-4567 | example@email.com| USA    | 2024-10-12 | Added         | Sent       | Sent       |              |             |     |
+
+## Usage
+
+1. **Form Submissions**: When a new form submission is entered into the sheet, the script will automatically create a calendar event and send an email notification.
+2. **Reminder Emails**: The script will send email reminders based on the time intervals you have set (7 days, 14 days, etc.).
+
+## Notes
+
+- Ensure that the GmailApp and CalendarApp services are enabled in your Google account for the script to work correctly.
+- You can customize the time intervals and email messages by adjusting the arrays `timeDifferences`, `emailSubjects`, and `messages` in the `checkAndSendEmailsForDate` function.
+
+
